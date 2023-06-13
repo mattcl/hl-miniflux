@@ -13,7 +13,7 @@ spec:
       containers:
         - name: app
           image: "miniflux/miniflux:2.0.44"
-          imagePullPolicy: Always
+          imagePullPolicy: IfNotPresent
           envFrom:
             - configMapRef:
                 name: "app-config"
