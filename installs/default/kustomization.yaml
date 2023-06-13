@@ -4,8 +4,8 @@ kind: Kustomization
 resources:
   - ../../components/app
   - ../../components/db
-  
   - db-secret.yaml
+  - miniflux-secret.yaml
 namespace: "miniflux"
 namePrefix: "miniflux-"
 images:
@@ -13,11 +13,14 @@ images:
     newTag: "2.0.44"
   - name: "docker.io/bitnami/postgresql"
     newTag: "15.3.0-debian-11-r9"
-  
+
 configMapGenerator:
   - name: app-config
     envs:
       - "app-config.env"
+  - name: app-sentinel
+    files:
+      - miniflux-secret.yaml
   # we're going to trigger the rollout by additionally having a generated
   # config map that changes when the sealed secret is updated.
   # See: https://github.com/kubernetes-sigs/kustomize/issues/702

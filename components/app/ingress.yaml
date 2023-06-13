@@ -16,6 +16,6 @@ spec:
       priority: 10
       services:
         - name: miniflux-svc
-          port: 80
+          port: http
   tls:
     certResolver: default
